@@ -1,0 +1,75 @@
+{
+  "name": "@abdokouta/support",
+  "version": "1.0.0",
+  "description": "Laravel-style Str, Collection, and Registry utilities for JavaScript/TypeScript",
+  "keywords": [
+    "laravel",
+    "string",
+    "collection",
+    "registry",
+    "utilities",
+    "str",
+    "map",
+    "set",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abdokouta/support.git"
+  },
+  "license": "MIT",
+  "author": "Pixielity",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --run --coverage",
+    "test:ui": "vitest --ui",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json}\""
+  },
+  "dependencies": {
+    "collect.js": "^4.36.1"
+  },
+  "devDependencies": {
+    "@nesvel/eslint-config": "^1.0.5",
+    "@nesvel/prettier-config": "^1.0.3",
+    "@nesvel/typescript-config": "^1.0.4",
+    "@types/node": "^25.5.0",
+    "@vitest/ui": "^4.1.2",
+    "prettier": "^3.8.1",
+    "tslib": "^2.8.1",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
