@@ -1,0 +1,60 @@
+# =============================================================================
+# Publish to npm Workflow
+# =============================================================================
+# Automatically publishes the package to npm when a version tag is pushed.
+# Triggered by tags matching the pattern v* (e.g., v1.0.0, v1.2.3)
+#
+# Requirements:
+# - NPM_TOKEN secret must be configured in repository settings
+# - Package version in package.json must match the tag version
+#
+# Process:
+# 1. Checkout code
+# 2. Setup Node.js with npm registry
+# 3. Install dependencies
+# 4. Build package
+# 5. Publish to npm with public access
+# =============================================================================
+
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  # ===========================================================================
+  # Publish Job
+  # ===========================================================================
+  # Builds and publishes the package to npm registry
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build package
+        run: pnpm run build
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
