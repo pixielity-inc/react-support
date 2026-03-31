@@ -46,9 +46,9 @@ export { Str } from "./str";
 // ============================================================================
 // Collection Utilities
 // ============================================================================
-export { Collection, collect } from "./collection";
-export { MapCollection, collectMap } from "./collection";
-export { SetCollection, collectSet } from "./collection";
+export { Collection, collect } from "./collections";
+export { MapCollection, collectMap } from "./collections";
+export { SetCollection, collectSet } from "./collections";
 
 // Re-export types from collect.js for convenience
 export type { Collection as CollectJsCollection } from "collect.js";
@@ -58,3 +58,23 @@ export type { Collection as CollectJsCollection } from "collect.js";
 // ============================================================================
 export { BaseRegistry } from "./registry";
 export type { BaseRegistryOptions, ValidationResult } from "./registry";
+
+// ============================================================================
+// Facades
+// ============================================================================
+export {
+  Facade,
+  createFacade,
+  createFacadeClass,
+  getContainerFromModule,
+  isFake,
+} from "./facades";
+export type {
+  ServiceIdentifier,
+  Newable,
+  ModuleContainer,
+  FacadeClass,
+  CreateFacadeOptions,
+  FacadeApplication,
+  Fake,
+} from "./facades";

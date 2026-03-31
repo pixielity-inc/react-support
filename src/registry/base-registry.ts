@@ -24,8 +24,8 @@
  * @category Registries
  */
 
-import type { Collection } from "@/interfaces/collection.interface";
 import { MapCollection } from "@/collections/collection";
+import type { Collection } from "@/interfaces/collection.interface";
 
 /**
  * Validation result for registry operations
