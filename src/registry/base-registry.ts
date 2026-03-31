@@ -24,8 +24,103 @@
  * @category Registries
  */
 
-import { MapCollection } from "@/collections/collection";
-import type { Collection } from "@/interfaces/collection.interface";
+import { MapCollection } from "../collections/map.collection";
+
+/**
+ * Collection interface for registry storage
+ */
+export interface Collection<T> {
+  add(key: string, value: T): void;
+  get(key: string): T | undefined;
+  getAll(): T[];
+  getKeys(): string[];
+  getAsRecord(): Record<string, T>;
+  has(key: string): boolean;
+  remove(key: string): boolean;
+  clear(): void;
+  size(): number;
+  isEmpty(): boolean;
+  forEach(callback: (value: T, key: string) => void): void;
+  map<U>(callback: (value: T, key: string) => U): U[];
+  filter(predicate: (value: T, key: string) => boolean): T[];
+  find(predicate: (value: T, key: string) => boolean): T | undefined;
+}
+
+/**
+ * Registry collection adapter
+ * Wraps MapCollection to implement Collection interface
+ */
+class RegistryCollection<T> implements Collection<T> {
+  private _storage = new MapCollection<string, T>();
+
+  add(key: string, value: T): void {
+    this._storage.set(key, value);
+  }
+
+  get(key: string): T | undefined {
+    return this._storage.get(key);
+  }
+
+  getAll(): T[] {
+    return this._storage.values();
+  }
+
+  getKeys(): string[] {
+    return this._storage.keys();
+  }
+
+  getAsRecord(): Record<string, T> {
+    return this._storage.toObject();
+  }
+
+  has(key: string): boolean {
+    return this._storage.has(key);
+  }
+
+  remove(key: string): boolean {
+    return this._storage.delete(key);
+  }
+
+  clear(): void {
+    this._storage.clear();
+  }
+
+  size(): number {
+    return this._storage.size();
+  }
+
+  isEmpty(): boolean {
+    return this._storage.isEmpty();
+  }
+
+  forEach(callback: (value: T, key: string) => void): void {
+    this._storage.each((value, key) => {
+      callback(value, key);
+    });
+  }
+
+  map<U>(callback: (value: T, key: string) => U): U[] {
+    const result: U[] = [];
+    this._storage.each((value, key) => {
+      result.push(callback(value, key));
+    });
+    return result;
+  }
+
+  filter(predicate: (value: T, key: string) => boolean): T[] {
+    const result: T[] = [];
+    this._storage.each((value, key) => {
+      if (predicate(value, key)) {
+        result.push(value);
+      }
+    });
+    return result;
+  }
+
+  find(predicate: (value: T, key: string) => boolean): T | undefined {
+    return this._storage.first(predicate);
+  }
+}
 
 /**
  * Validation result for registry operations
@@ -233,8 +328,8 @@ export class BaseRegistry<T> implements Collection<T> {
    * ```
    */
   constructor(options: BaseRegistryOptions<T> = {}) {
-    // Initialize collection with MapCollection (O(1) operations)
-    this.collection = new MapCollection<T>();
+    // Initialize collection with RegistryCollection (O(1) operations)
+    this.collection = new RegistryCollection<T>();
     
     // Store default item if provided
     this.defaultItem = options.defaultItem;

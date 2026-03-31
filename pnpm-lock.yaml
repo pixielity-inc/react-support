@@ -13,8 +13,8 @@ importers:
         version: 4.36.1
     devDependencies:
       '@abdokouta/react-di':
-        specifier: ^2.0.0
-        version: 2.0.1(react@18.3.1)
+        specifier: ^2.1.0
+        version: 2.1.0(react@18.3.1)
       '@nesvel/eslint-config':
         specifier: ^1.0.5
         version: 1.0.5(@babel/core@7.29.0)(eslint@10.1.0)(tsup@8.5.1(postcss@8.5.8)(typescript@6.0.2))(typescript@6.0.2)
@@ -48,8 +48,8 @@ importers:
 
 packages:
 
-  '@abdokouta/react-di@2.0.1':
-    resolution: {integrity: sha512-0f+aHcttlu5V2UbTylBcGJdGH7376Xe3q0k+WXe+legzne++DLHS4qA3cZw/qwEjBrwWZphlVRVO1vLhvBhH8Q==}
+  '@abdokouta/react-di@2.1.0':
+    resolution: {integrity: sha512-Z9ZrufFvffpyLdqoOW3QYRIU3P934xPykkhqKY69ToRNYv09ZWxxYIq7h/19PIw4UY9wxpV3kEUZo7tS2l6CKA==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1481,7 +1481,7 @@ packages:
 
 snapshots:
 
-  '@abdokouta/react-di@2.0.1(react@18.3.1)':
+  '@abdokouta/react-di@2.1.0(react@18.3.1)':
     dependencies:
       '@inversiland/inversify': 6.1.5(reflect-metadata@0.2.2)
       inversiland: 0.6.2

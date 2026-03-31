@@ -63,7 +63,7 @@
     }
   },
   "devDependencies": {
-    "@abdokouta/react-di": "^2.0.0",
+    "@abdokouta/react-di": "^2.1.0",
     "@nesvel/eslint-config": "^1.0.5",
     "@nesvel/prettier-config": "^1.0.3",
     "@nesvel/typescript-config": "^1.0.4",
