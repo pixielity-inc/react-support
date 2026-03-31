@@ -1,34 +1,54 @@
-# @abdokouta/support
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pixielity-inc/react-support/main/assets/banner.svg" alt="@abdokouta/react-support" width="100%" />
+</p>
 
-Laravel-style utilities for JavaScript/TypeScript. Provides powerful string manipulation, collection handling, and registry patterns inspired by Laravel's support package.
+<h1 align="center">@abdokouta/react-support</h1>
 
-## Features
+<p align="center">
+  <strong>Laravel-style utilities for JavaScript/TypeScript</strong>
+</p>
 
-- 🎯 **Str Class**: 100+ string manipulation methods matching Laravel's API
-- 📦 **Collection**: Array collection with 50+ chainable methods (powered by collect.js)
-- 🗺️ **MapCollection**: Map data structure with collection methods
-- 🎲 **SetCollection**: Set data structure with collection methods
-- 🏗️ **BaseRegistry**: Generic registry pattern for building extensible systems
-- 💪 **TypeScript**: Full type safety with comprehensive type definitions
-- 🔗 **Chainable**: Fluent, chainable API for elegant code
-- 🚀 **Zero Config**: Works out of the box
+<p align="center">
+  <a href="https://www.npmjs.com/package/@abdokouta/react-support"><img src="https://img.shields.io/npm/v/@abdokouta/react-support.svg?style=flat-square" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@abdokouta/react-support"><img src="https://img.shields.io/npm/dm/@abdokouta/react-support.svg?style=flat-square" alt="npm downloads" /></a>
+  <a href="https://github.com/pixielity-inc/react-support/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@abdokouta/react-support.svg?style=flat-square" alt="license" /></a>
+  <a href="https://github.com/pixielity-inc/react-support"><img src="https://img.shields.io/github/stars/pixielity-inc/react-support?style=flat-square" alt="GitHub stars" /></a>
+</p>
 
-## Installation
+<p align="center">
+  Powerful string manipulation, collection handling, facades, and registry patterns inspired by Laravel
+</p>
+
+---
+
+## ✨ Features
+
+- 🎯 **Str Class** - 100+ string manipulation methods matching Laravel's API
+- 📦 **Collection** - Array collection with 50+ chainable methods (powered by collect.js)
+- 🗺️ **MapCollection** - Map data structure with collection methods
+- 🎲 **SetCollection** - Set data structure with collection methods
+- 🏗️ **BaseRegistry** - Generic registry pattern for building extensible systems
+- 🎭 **Facades** - Laravel-style facades for clean service access
+- 💪 **TypeScript** - Full type safety with comprehensive type definitions
+- 🔗 **Chainable** - Fluent, chainable API for elegant code
+- 🚀 **Zero Config** - Works out of the box
+
+## 📦 Installation
 
 ```bash
-npm install @abdokouta/support
+npm install @abdokouta/react-support
 # or
-pnpm add @abdokouta/support
+pnpm add @abdokouta/react-support
 # or
-yarn add @abdokouta/support
+yarn add @abdokouta/react-support
 ```
 
-## Usage
+## 🚀 Usage
 
 ### Str Class
 
 ```typescript
-import { Str } from '@abdokouta/support';
+import { Str } from '@abdokouta/react-support';
 
 // String manipulation
 Str.camel('foo_bar');                    // 'fooBar'
@@ -60,7 +80,7 @@ Str.slug('Laravel 5 Framework', '-');    // 'laravel-5-framework'
 ### Collection (Array)
 
 ```typescript
-import { collect } from '@abdokouta/support';
+import { collect } from '@abdokouta/react-support';
 
 // Create a collection
 const collection = collect([1, 2, 3, 4, 5]);
@@ -88,10 +108,27 @@ collect([1, 2, 3, 4, 5]).max();          // 5
 collect([1, 2, 3, 4, 5]).min();          // 1
 ```
 
+### Facades
+
+```typescript
+import { Facade, createFacade } from '@abdokouta/react-support';
+import { Container } from '@abdokouta/react-di';
+
+// Set the container for facades
+Facade.setFacadeContainer(Container.getContainer());
+
+// Create a facade for a service
+const Config = createFacade<IConfigService>('ConfigService');
+
+// Use the facade
+Config.get('app.name');
+Config.set('app.debug', true);
+```
+
 ### MapCollection
 
 ```typescript
-import { collectMap } from '@abdokouta/support';
+import { collectMap } from '@abdokouta/react-support';
 
 const map = collectMap({ name: 'John', age: 30 });
 
@@ -105,7 +142,7 @@ map.values();                            // ['John', 30, 'New York']
 ### SetCollection
 
 ```typescript
-import { collectSet } from '@abdokouta/support';
+import { collectSet } from '@abdokouta/react-support';
 
 const set1 = collectSet([1, 2, 3]);
 const set2 = collectSet([2, 3, 4]);
@@ -118,7 +155,7 @@ set1.diff(set2).all();                   // [1]
 ### BaseRegistry
 
 ```typescript
-import { BaseRegistry } from '@abdokouta/support';
+import { BaseRegistry } from '@abdokouta/react-support';
 
 // Create a typed registry
 interface Theme {
@@ -148,12 +185,12 @@ const allThemes = themeRegistry.getAll();
 const hasTheme = themeRegistry.has('dark');
 ```
 
-## TypeScript Support
+## 📘 TypeScript Support
 
 Full TypeScript support with comprehensive type definitions:
 
 ```typescript
-import { Str, Collection, MapCollection, SetCollection, BaseRegistry } from '@abdokouta/support';
+import { Str, Collection, MapCollection, SetCollection, BaseRegistry } from '@abdokouta/react-support';
 
 // Type-safe collections
 const numbers: Collection<number> = collect([1, 2, 3]);
@@ -168,11 +205,11 @@ const tags: SetCollection<string> = collectSet(['tag1', 'tag2']);
 const registry = new BaseRegistry<MyType>();
 ```
 
-## License
+## 📄 License
 
 MIT
 
-## Credits
+## 🙏 Credits
 
 - Inspired by [Laravel](https://laravel.com)'s support package
 - Array collections powered by [collect.js](https://collect.js.org/)

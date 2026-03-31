@@ -1,5 +1,5 @@
 /**
- * Type declarations for Vitest in @pixielity/logger
+ * Type declarations for Vitest in @abdokouta/logger
  */
 
 declare module "vitest" {

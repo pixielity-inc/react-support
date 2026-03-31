@@ -20,7 +20,7 @@
  * - Configuration registry (storing configs)
  * - Any key-value registry needs
  * 
- * @module @pixielity/support
+ * @module @abdokouta/support
  * @category Registries
  */
 
