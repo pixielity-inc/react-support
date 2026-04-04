@@ -25,15 +25,33 @@ export class Str {
    * Convert a string to title case following APA guidelines
    */
   static apa(value: string): string {
-    const minorWords = ['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'up'];
+    const minorWords = [
+      'a',
+      'an',
+      'and',
+      'as',
+      'at',
+      'but',
+      'by',
+      'for',
+      'in',
+      'of',
+      'on',
+      'or',
+      'the',
+      'to',
+      'up',
+    ];
     const words = value.split(' ');
-    
-    return words.map((word, index) => {
-      if (index === 0 || !minorWords.includes(word.toLowerCase())) {
-        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-      }
-      return word.toLowerCase();
-    }).join(' ');
+
+    return words
+      .map((word, index) => {
+        if (index === 0 || !minorWords.includes(word.toLowerCase())) {
+          return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+        return word.toLowerCase();
+      })
+      .join(' ');
   }
 
   /**
@@ -85,7 +103,7 @@ export class Str {
    */
   static camel(value: string): string {
     return value
-      .replace(/[-_\s]+(.)?/g, (_, char) => char ? char.toUpperCase() : '')
+      .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
       .replace(/^(.)/, (char) => char.toLowerCase());
   }
 
@@ -129,8 +147,8 @@ export class Str {
   static contains(haystack: string, needles: string | string[], ignoreCase = false): boolean {
     const needleArray = Array.isArray(needles) ? needles : [needles];
     const subject = ignoreCase ? haystack.toLowerCase() : haystack;
-    
-    return needleArray.some(needle => {
+
+    return needleArray.some((needle) => {
       const search = ignoreCase ? needle.toLowerCase() : needle;
       return subject.includes(search);
     });
@@ -141,8 +159,8 @@ export class Str {
    */
   static containsAll(haystack: string, needles: string[], ignoreCase = false): boolean {
     const subject = ignoreCase ? haystack.toLowerCase() : haystack;
-    
-    return needles.every(needle => {
+
+    return needles.every((needle) => {
       const search = ignoreCase ? needle.toLowerCase() : needle;
       return subject.includes(search);
     });
@@ -169,26 +187,30 @@ export class Str {
    */
   static endsWith(haystack: string, needles: string | string[]): boolean {
     const needleArray = Array.isArray(needles) ? needles : [needles];
-    return needleArray.some(needle => haystack.endsWith(needle));
+    return needleArray.some((needle) => haystack.endsWith(needle));
   }
 
   /**
    * Extract an excerpt from text that matches the first instance of a phrase
    */
-  static excerpt(text: string, phrase: string, options: { radius?: number; omission?: string } = {}): string {
+  static excerpt(
+    text: string,
+    phrase: string,
+    options: { radius?: number; omission?: string } = {}
+  ): string {
     const radius = options.radius ?? 100;
     const omission = options.omission ?? '...';
-    
+
     const index = text.indexOf(phrase);
     if (index === -1) return '';
-    
+
     const start = Math.max(0, index - radius);
     const end = Math.min(text.length, index + phrase.length + radius);
-    
+
     let excerpt = text.substring(start, end);
     if (start > 0) excerpt = omission + excerpt;
     if (end < text.length) excerpt = excerpt + omission;
-    
+
     return excerpt;
   }
 
@@ -207,7 +229,7 @@ export class Str {
       .replace(/([a-z])([A-Z])/g, '$1 $2')
       .replace(/[-_]/g, ' ')
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ');
   }
 
@@ -303,16 +325,16 @@ export class Str {
    */
   static limit(value: string, limit = 100, end = '...', preserveWords = false): string {
     if (value.length <= limit) return value;
-    
+
     let truncated = value.substring(0, limit);
-    
+
     if (preserveWords) {
       const lastSpace = truncated.lastIndexOf(' ');
       if (lastSpace > 0) {
         truncated = truncated.substring(0, lastSpace);
       }
     }
-    
+
     return truncated + end;
   }
 
@@ -330,10 +352,10 @@ export class Str {
     if (index < 0) {
       index = value.length + index;
     }
-    
+
     const maskLength = length ?? value.length - index;
     const mask = character.repeat(Math.abs(maskLength));
-    
+
     return value.substring(0, index) + mask + value.substring(index + Math.abs(maskLength));
   }
 
@@ -343,10 +365,10 @@ export class Str {
   static padBoth(value: string, length: number, pad = ' '): string {
     const totalPadding = length - value.length;
     if (totalPadding <= 0) return value;
-    
+
     const leftPadding = Math.floor(totalPadding / 2);
     const rightPadding = totalPadding - leftPadding;
-    
+
     return pad.repeat(leftPadding) + value + pad.repeat(rightPadding);
   }
 
@@ -369,13 +391,18 @@ export class Str {
    */
   static plural(value: string, count = 2): string {
     if (count === 1) return value;
-    
+
     // Simple pluralization rules
     if (value.endsWith('y') && !/[aeiou]y$/i.test(value)) {
       return value.slice(0, -1) + 'ies';
     }
-    if (value.endsWith('s') || value.endsWith('x') || value.endsWith('z') || 
-        value.endsWith('ch') || value.endsWith('sh')) {
+    if (
+      value.endsWith('s') ||
+      value.endsWith('x') ||
+      value.endsWith('z') ||
+      value.endsWith('ch') ||
+      value.endsWith('sh')
+    ) {
       return value + 'es';
     }
     return value + 's';
@@ -386,7 +413,7 @@ export class Str {
    */
   static pluralStudly(value: string, count = 2): string {
     const parts = value.match(/[A-Z][a-z]*/g) || [value];
-    const lastWord = parts[parts.length - 1];
+    const lastWord = parts[parts.length - 1]!;
     const pluralized = Str.plural(lastWord, count);
     parts[parts.length - 1] = pluralized;
     return parts.join('');
@@ -418,13 +445,13 @@ export class Str {
   static remove(search: string | string[], subject: string, caseSensitive = true): string {
     const searches = Array.isArray(search) ? search : [search];
     let result = subject;
-    
-    searches.forEach(s => {
+
+    searches.forEach((s) => {
       const flags = caseSensitive ? 'g' : 'gi';
       const escaped = s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       result = result.replace(new RegExp(escaped, flags), '');
     });
-    
+
     return result;
   }
 
@@ -450,12 +477,12 @@ export class Str {
   static replaceArray(search: string, replacements: string[], subject: string): string {
     let result = subject;
     let index = 0;
-    
+
     while (result.includes(search) && index < replacements.length) {
-      result = result.replace(search, replacements[index]);
+      result = result.replace(search, replacements[index]!);
       index++;
     }
-    
+
     return result;
   }
 
@@ -479,9 +506,7 @@ export class Str {
    * Replace the first occurrence only if it appears at the start
    */
   static replaceStart(search: string, replace: string, subject: string): string {
-    return subject.startsWith(search) 
-      ? replace + subject.substring(search.length)
-      : subject;
+    return subject.startsWith(search) ? replace + subject.substring(search.length) : subject;
   }
 
   /**
@@ -558,7 +583,7 @@ export class Str {
    */
   static startsWith(haystack: string, needles: string | string[]): boolean {
     const needleArray = Array.isArray(needles) ? needles : [needles];
-    return needleArray.some(needle => haystack.startsWith(needle));
+    return needleArray.some((needle) => haystack.startsWith(needle));
   }
 
   /**
@@ -566,7 +591,7 @@ export class Str {
    */
   static studly(value: string): string {
     return value
-      .replace(/[-_\s]+(.)?/g, (_, char) => char ? char.toUpperCase() : '')
+      .replace(/[-_\s]+(.)?/g, (_, char) => (char ? char.toUpperCase() : ''))
       .replace(/^(.)/, (char) => char.toUpperCase());
   }
 
@@ -620,7 +645,7 @@ export class Str {
     return value
       .toLowerCase()
       .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   }
 
@@ -712,7 +737,10 @@ export class Str {
    * Get the number of words a string contains
    */
   static wordCount(value: string): number {
-    return value.trim().split(/\s+/).filter(word => word.length > 0).length;
+    return value
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0).length;
   }
 
   /**
@@ -722,8 +750,8 @@ export class Str {
     const words = value.split(' ');
     let line = '';
     const lines: string[] = [];
-    
-    words.forEach(word => {
+
+    words.forEach((word) => {
       if ((line + word).length > characters) {
         if (line) lines.push(line.trim());
         line = word + ' ';
@@ -731,7 +759,7 @@ export class Str {
         line += word + ' ';
       }
     });
-    
+
     if (line) lines.push(line.trim());
     return lines.join(breakStr);
   }
