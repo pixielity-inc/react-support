@@ -1,8 +1,8 @@
 # =============================================================================
 # Publish to npm Workflow
 # =============================================================================
-# Automatically publishes packages to npm when a version tag is pushed.
-# Triggered by tags matching the pattern v* (e.g., v1.0.0, v1.2.3)
+# Automatically publishes @abdokouta/react-support to npm when a version tag
+# is pushed. Triggered by tags matching the pattern v* (e.g., v1.2.0)
 #
 # Requirements:
 # - NPM_TOKEN secret must be configured in repository settings
@@ -17,9 +17,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # ===========================================================================
-  # Publish Job
-  # ===========================================================================
   publish:
     runs-on: ubuntu-latest
     permissions:
@@ -42,14 +39,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages
+      - name: Build
         run: pnpm run build
 
       - name: Run tests
         run: pnpm run test
 
-      - name: Publish @abdokouta/refine
+      - name: Publish to npm
         run: pnpm publish --access public --no-git-checks
-        working-directory: packages/refine
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
