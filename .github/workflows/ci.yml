@@ -3,10 +3,6 @@
 # =============================================================================
 # Runs automated tests and linting on every push and pull request to main/develop
 # branches. Ensures code quality and prevents broken code from being merged.
-#
-# Jobs:
-# - test: Runs tests on Node.js 20
-# - lint: Checks code formatting with Prettier
 # =============================================================================
 
 name: CI
@@ -19,11 +15,13 @@ on:
 
 jobs:
   # ===========================================================================
-  # Test Job
+  # Build & Test Job
   # ===========================================================================
-  # Runs the test suite using pnpm
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,26 +29,27 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build package
+      - name: Build packages
         run: pnpm run build
+
+      - name: Run typecheck
+        run: pnpm run typecheck
 
       - name: Run tests
         run: pnpm run test
-        continue-on-error: true
 
   # ===========================================================================
-  # Lint Job
+  # Lint & Format Job
   # ===========================================================================
-  # Checks code formatting to ensure consistent code style
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -63,12 +62,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting
         run: pnpm run format:check
-        continue-on-error: true
+
+      - name: Run linter
+        run: pnpm run lint
