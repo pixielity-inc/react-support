@@ -372,7 +372,9 @@ packages/{package-name}/
     /* Testing */
     "types": ["vitest/globals"]
   },
-  "include": ["src/**/*", "__tests__/**/*"],
+  "include": ["src/** 
+ * /*", "__tests__/* 
+ */*"],
   "exclude": ["node_modules", "dist", "config"]
 }
 ```
