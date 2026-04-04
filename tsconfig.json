@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
+    "lib": ["ES2020"],
     /* Silence TypeScript deprecation warnings */
     "ignoreDeprecations": "6.0",
     /* Module resolution - Override Nesvel's NodeNext for compatibility */
