@@ -187,7 +187,7 @@ export class MapCollection<K = any, V = any> {
     if (!callback) {
       return this.internalMap.values().next().value;
     }
-    
+
     for (const [key, value] of this.internalMap) {
       if (callback(value, key)) {
         return value;
@@ -201,11 +201,11 @@ export class MapCollection<K = any, V = any> {
    */
   last(callback?: (value: V, key: K) => boolean): V | undefined {
     const entries = Array.from(this.internalMap.entries()).reverse();
-    
+
     if (!callback) {
       return entries[0]?.[1];
     }
-    
+
     for (const [key, value] of entries) {
       if (callback(value, key)) {
         return value;
@@ -249,7 +249,7 @@ export class MapCollection<K = any, V = any> {
    */
   only(keys: K[]): MapCollection<K, V> {
     const result = new Map<K, V>();
-    keys.forEach(key => {
+    keys.forEach((key) => {
       if (this.internalMap.has(key)) {
         result.set(key, this.internalMap.get(key)!);
       }
@@ -339,6 +339,8 @@ export class MapCollection<K = any, V = any> {
 /**
  * Helper function to create a new map collection
  */
-export function collectMap<K, V>(entries?: Iterable<[K, V]> | Record<string, V>): MapCollection<K, V> {
+export function collectMap<K, V>(
+  entries?: Iterable<[K, V]> | Record<string, V>
+): MapCollection<K, V> {
   return new MapCollection(entries);
 }

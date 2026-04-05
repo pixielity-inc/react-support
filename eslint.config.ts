@@ -6,8 +6,8 @@
  * @see https://eslint.org/docs/latest/use/configure/configuration-files
  */
 
-import type { Linter } from "eslint";
-import { viteConfig } from "@nesvel/eslint-config";
+import type { Linter } from 'eslint';
+import { viteConfig } from '@nesvel/eslint-config';
 
 /**
  * Root ESLint flat configuration array.
@@ -20,16 +20,16 @@ import { viteConfig } from "@nesvel/eslint-config";
 const config: Linter.Config[] = [
   ...viteConfig,
 
-  /** 
- * Directories and files excluded from linting across the monorepo. 
- */
+  /**
+   * Directories and files excluded from linting across the monorepo.
+   */
   {
-    ignores: ["dist/**", "node_modules/**", "*.config.js", "*.config.ts"],
+    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts'],
   },
 
-  /** 
- * Monorepo-wide rule overrides — add any shared overrides here. 
- */
+  /**
+   * Monorepo-wide rule overrides — add any shared overrides here.
+   */
   {
     rules: {},
   },

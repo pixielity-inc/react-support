@@ -1,10 +1,10 @@
 ---
 name: clean-architecture-standards
 description:
-  "Enforces strict clean architecture, file naming, and code organization
+  'Enforces strict clean architecture, file naming, and code organization
   standards across all programming languages. Use for creating new projects,
   refactoring code, or generating files to ensure one-export-per-file, proper
-  folder structures, and comprehensive documentation."
+  folder structures, and comprehensive documentation.'
 ---
 
 # Clean Architecture & Coding Standards

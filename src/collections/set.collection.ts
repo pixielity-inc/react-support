@@ -121,7 +121,7 @@ export class SetCollection<T = any> {
   map<U>(callback: (item: T, index: number) => U): SetCollection<U> {
     const result = new Set<U>();
     let index = 0;
-    this.set.forEach(item => {
+    this.set.forEach((item) => {
       result.add(callback(item, index++));
     });
     return new SetCollection(result);
@@ -133,7 +133,7 @@ export class SetCollection<T = any> {
   filter(callback: (item: T, index: number) => boolean): SetCollection<T> {
     const result = new Set<T>();
     let index = 0;
-    this.set.forEach(item => {
+    this.set.forEach((item) => {
       if (callback(item, index++)) {
         result.add(item);
       }
@@ -174,7 +174,7 @@ export class SetCollection<T = any> {
     if (!callback) {
       return this.set.values().next().value;
     }
-    
+
     let index = 0;
     for (const item of this.set) {
       if (callback(item, index++)) {
@@ -189,11 +189,11 @@ export class SetCollection<T = any> {
    */
   last(callback?: (item: T, index: number) => boolean): T | undefined {
     const items = Array.from(this.set).reverse();
-    
+
     if (!callback) {
       return items[0];
     }
-    
+
     for (let i = 0; i < items.length; i++) {
       if (callback(items[i]!, i)) {
         return items[i];
@@ -208,7 +208,7 @@ export class SetCollection<T = any> {
   reduce<U>(callback: (carry: U, item: T, index: number) => U, initial: U): U {
     let carry = initial;
     let index = 0;
-    this.set.forEach(item => {
+    this.set.forEach((item) => {
       carry = callback(carry, item, index++);
     });
     return carry;
@@ -219,14 +219,14 @@ export class SetCollection<T = any> {
    */
   merge(other: SetCollection<T> | Set<T> | T[]): this {
     if (other instanceof SetCollection) {
-      other.each(item => {
+      other.each((item) => {
         this.add(item);
         return undefined;
       });
     } else if (other instanceof Set) {
-      other.forEach(item => this.add(item));
+      other.forEach((item) => this.add(item));
     } else {
-      other.forEach(item => this.add(item));
+      other.forEach((item) => this.add(item));
     }
     return this;
   }
@@ -243,14 +243,15 @@ export class SetCollection<T = any> {
    * Get the intersection of this set and another
    */
   intersect(other: SetCollection<T> | Set<T> | T[]): SetCollection<T> {
-    const otherSet = other instanceof SetCollection 
-      ? other.toSet() 
-      : other instanceof Set 
-        ? other 
-        : new Set(other);
-    
+    const otherSet =
+      other instanceof SetCollection
+        ? other.toSet()
+        : other instanceof Set
+          ? other
+          : new Set(other);
+
     const result = new Set<T>();
-    this.set.forEach(item => {
+    this.set.forEach((item) => {
       if (otherSet.has(item)) {
         result.add(item);
       }
@@ -262,14 +263,15 @@ export class SetCollection<T = any> {
    * Get the difference between this set and another
    */
   diff(other: SetCollection<T> | Set<T> | T[]): SetCollection<T> {
-    const otherSet = other instanceof SetCollection 
-      ? other.toSet() 
-      : other instanceof Set 
-        ? other 
-        : new Set(other);
-    
+    const otherSet =
+      other instanceof SetCollection
+        ? other.toSet()
+        : other instanceof Set
+          ? other
+          : new Set(other);
+
     const result = new Set<T>();
-    this.set.forEach(item => {
+    this.set.forEach((item) => {
       if (!otherSet.has(item)) {
         result.add(item);
       }
@@ -281,26 +283,27 @@ export class SetCollection<T = any> {
    * Get items that are in either set but not in both
    */
   symmetricDiff(other: SetCollection<T> | Set<T> | T[]): SetCollection<T> {
-    const otherSet = other instanceof SetCollection 
-      ? other.toSet() 
-      : other instanceof Set 
-        ? other 
-        : new Set(other);
-    
+    const otherSet =
+      other instanceof SetCollection
+        ? other.toSet()
+        : other instanceof Set
+          ? other
+          : new Set(other);
+
     const result = new Set<T>();
-    
-    this.set.forEach(item => {
+
+    this.set.forEach((item) => {
       if (!otherSet.has(item)) {
         result.add(item);
       }
     });
-    
-    otherSet.forEach(item => {
+
+    otherSet.forEach((item) => {
       if (!this.set.has(item)) {
         result.add(item);
       }
     });
-    
+
     return new SetCollection(result);
   }
 
@@ -308,12 +311,13 @@ export class SetCollection<T = any> {
    * Determine if this set is a subset of another
    */
   isSubsetOf(other: SetCollection<T> | Set<T> | T[]): boolean {
-    const otherSet = other instanceof SetCollection 
-      ? other.toSet() 
-      : other instanceof Set 
-        ? other 
-        : new Set(other);
-    
+    const otherSet =
+      other instanceof SetCollection
+        ? other.toSet()
+        : other instanceof Set
+          ? other
+          : new Set(other);
+
     for (const item of this.set) {
       if (!otherSet.has(item)) {
         return false;
@@ -326,12 +330,13 @@ export class SetCollection<T = any> {
    * Determine if this set is a superset of another
    */
   isSupersetOf(other: SetCollection<T> | Set<T> | T[]): boolean {
-    const otherSet = other instanceof SetCollection 
-      ? other.toSet() 
-      : other instanceof Set 
-        ? other 
-        : new Set(other);
-    
+    const otherSet =
+      other instanceof SetCollection
+        ? other.toSet()
+        : other instanceof Set
+          ? other
+          : new Set(other);
+
     for (const item of otherSet) {
       if (!this.set.has(item)) {
         return false;

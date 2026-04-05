@@ -1,4 +1,4 @@
-import type { ValidationResult } from "./validation-result.type";
+import type { ValidationResult } from './validation-result.type';
 
 /**
  * Base registry options

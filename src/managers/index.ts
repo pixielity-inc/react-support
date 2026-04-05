@@ -1,1 +1,1 @@
-export { MultipleInstanceManager } from "./multiple-instance-manager";
+export { MultipleInstanceManager } from './multiple-instance-manager';

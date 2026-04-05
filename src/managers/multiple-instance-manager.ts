@@ -41,7 +41,7 @@
  * @module services/base-manager
  */
 
-import type { DriverCreator } from "@/types";
+import type { DriverCreator } from '@/types';
 
 /**
  * Abstract base manager for multi-instance, multi-driver services.
@@ -214,9 +214,7 @@ export abstract class MultipleInstanceManager<T> {
 
     const driver = config[this.driverKey];
     if (!driver) {
-      throw new Error(
-        `Instance [${name}] does not specify a "${this.driverKey}".`
-      );
+      throw new Error(`Instance [${name}] does not specify a "${this.driverKey}".`);
     }
 
     // Custom creator takes priority

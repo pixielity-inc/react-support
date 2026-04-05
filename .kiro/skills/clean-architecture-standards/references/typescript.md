@@ -147,18 +147,18 @@ re-exports:
 
 ```typescript
 // interfaces/index.ts
-export { User } from "./user.interface";
-export { ApiResponse } from "./api-response.interface";
+export { User } from './user.interface';
+export { ApiResponse } from './api-response.interface';
 ```
 
 Import from the barrel, not the individual file:
 
 ```typescript
 // CORRECT
-import { User, ApiResponse } from "@/interfaces";
+import { User, ApiResponse } from '@/interfaces';
 
 // WRONG
-import { User } from "@/interfaces/user.interface";
+import { User } from '@/interfaces/user.interface';
 ```
 
 ## Docblock Standard

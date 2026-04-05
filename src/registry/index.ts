@@ -5,4 +5,4 @@
  * @category Registries
  */
 
-export { BaseRegistry } from "./base-registry";
+export { BaseRegistry } from './base-registry';

@@ -24,7 +24,8 @@
 ## ✨ Features
 
 - 🎯 **Str Class** - 100+ string manipulation methods matching Laravel's API
-- 📦 **Collection** - Array collection with 50+ chainable methods (powered by collect.js)
+- 📦 **Collection** - Array collection with 50+ chainable methods (powered by
+  collect.js)
 - 🗺️ **MapCollection** - Map data structure with collection methods
 - 🎲 **SetCollection** - Set data structure with collection methods
 - 🏗️ **BaseRegistry** - Generic registry pattern for building extensible systems
@@ -51,28 +52,28 @@ yarn add @abdokouta/react-support
 import { Str } from '@abdokouta/react-support';
 
 // String manipulation
-Str.camel('foo_bar');                    // 'fooBar'
-Str.snake('fooBar');                     // 'foo_bar'
-Str.kebab('fooBar');                     // 'foo-bar'
-Str.studly('foo_bar');                   // 'FooBar'
-Str.title('a nice title');               // 'A Nice Title'
+Str.camel('foo_bar'); // 'fooBar'
+Str.snake('fooBar'); // 'foo_bar'
+Str.kebab('fooBar'); // 'foo-bar'
+Str.studly('foo_bar'); // 'FooBar'
+Str.title('a nice title'); // 'A Nice Title'
 
 // String inspection
-Str.contains('This is my name', 'my');   // true
-Str.startsWith('Hello World', 'Hello');  // true
-Str.endsWith('Hello World', 'World');    // true
-Str.isJson('{"key": "value"}');          // true
-Str.isUrl('https://example.com');        // true
+Str.contains('This is my name', 'my'); // true
+Str.startsWith('Hello World', 'Hello'); // true
+Str.endsWith('Hello World', 'World'); // true
+Str.isJson('{"key": "value"}'); // true
+Str.isUrl('https://example.com'); // true
 Str.isUuid('a0a2a2d2-0b87-4a18-83f2-2529882be2de'); // true
 
 // String extraction
 Str.after('This is my name', 'This is'); // ' my name'
-Str.before('This is my name', 'my');     // 'This is '
+Str.before('This is my name', 'my'); // 'This is '
 Str.between('This is my name', 'This', 'name'); // ' is my '
 
 // String modification
-Str.limit('The quick brown fox', 10);    // 'The quick...'
-Str.slug('Laravel 5 Framework', '-');    // 'laravel-5-framework'
+Str.limit('The quick brown fox', 10); // 'The quick...'
+Str.slug('Laravel 5 Framework', '-'); // 'laravel-5-framework'
 
 // And 80+ more methods!
 ```
@@ -87,25 +88,25 @@ const collection = collect([1, 2, 3, 4, 5]);
 
 // Chainable methods
 collection
-  .filter(item => item > 2)
-  .map(item => item * 2)
-  .sum();  // 24
+  .filter((item) => item > 2)
+  .map((item) => item * 2)
+  .sum(); // 24
 
 // Working with objects
 const users = collect([
   { name: 'John', age: 30 },
   { name: 'Jane', age: 25 },
-  { name: 'Bob', age: 35 }
+  { name: 'Bob', age: 35 },
 ]);
 
 users.where('age', '>', 25).pluck('name').all();
 // ['John', 'Bob']
 
 // Aggregation
-collect([1, 2, 3, 4, 5]).sum();          // 15
-collect([1, 2, 3, 4, 5]).avg();          // 3
-collect([1, 2, 3, 4, 5]).max();          // 5
-collect([1, 2, 3, 4, 5]).min();          // 1
+collect([1, 2, 3, 4, 5]).sum(); // 15
+collect([1, 2, 3, 4, 5]).avg(); // 3
+collect([1, 2, 3, 4, 5]).max(); // 5
+collect([1, 2, 3, 4, 5]).min(); // 1
 ```
 
 ### Facades
@@ -133,10 +134,10 @@ import { collectMap } from '@abdokouta/react-support';
 const map = collectMap({ name: 'John', age: 30 });
 
 map.set('city', 'New York');
-map.get('name');                         // 'John'
-map.has('age');                          // true
-map.keys();                              // ['name', 'age', 'city']
-map.values();                            // ['John', 30, 'New York']
+map.get('name'); // 'John'
+map.has('age'); // true
+map.keys(); // ['name', 'age', 'city']
+map.values(); // ['John', 30, 'New York']
 ```
 
 ### SetCollection
@@ -147,9 +148,9 @@ import { collectSet } from '@abdokouta/react-support';
 const set1 = collectSet([1, 2, 3]);
 const set2 = collectSet([2, 3, 4]);
 
-set1.union(set2).all();                  // [1, 2, 3, 4]
-set1.intersect(set2).all();              // [2, 3]
-set1.diff(set2).all();                   // [1]
+set1.union(set2).all(); // [1, 2, 3, 4]
+set1.intersect(set2).all(); // [2, 3]
+set1.diff(set2).all(); // [1]
 ```
 
 ### BaseRegistry
@@ -172,7 +173,7 @@ const themeRegistry = new BaseRegistry<Theme>({
   },
   afterAdd: (key, theme) => {
     console.log(`Registered theme: ${theme.name}`);
-  }
+  },
 });
 
 // Register items
@@ -190,7 +191,13 @@ const hasTheme = themeRegistry.has('dark');
 Full TypeScript support with comprehensive type definitions:
 
 ```typescript
-import { Str, Collection, MapCollection, SetCollection, BaseRegistry } from '@abdokouta/react-support';
+import {
+  Str,
+  Collection,
+  MapCollection,
+  SetCollection,
+  BaseRegistry,
+} from '@abdokouta/react-support';
 
 // Type-safe collections
 const numbers: Collection<number> = collect([1, 2, 3]);

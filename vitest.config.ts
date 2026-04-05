@@ -15,9 +15,9 @@
  * @category Configuration
  */
 
-import { fileURLToPath } from "url";
-import { resolve, dirname } from "path";
-import { defineConfig } from "vitest/config";
+import { fileURLToPath } from 'url';
+import { resolve, dirname } from 'path';
+import { defineConfig } from 'vitest/config';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,30 +28,30 @@ export default defineConfig({
     globals: true,
 
     // Use node environment
-    environment: "node",
+    environment: 'node',
 
     // Run setup file before tests
-    setupFiles: ["./__tests__/vitest.setup.ts"],
+    setupFiles: ['./__tests__/vitest.setup.ts'],
 
     // Only include __tests__ directory
-    include: ["__tests__/**/*.{test,spec}.{ts,tsx}"],
+    include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
 
     // Coverage configuration
     coverage: {
       // Use v8 coverage provider (faster than istanbul)
-      provider: "v8",
+      provider: 'v8',
 
       // Generate multiple report formats
-      reporter: ["text", "json", "html"],
+      reporter: ['text', 'json', 'html'],
 
       // Exclude files from coverage
       exclude: [
-        "node_modules/",
-        "dist/",
-        "test/",
-        "**/*.test.ts",
-        "**/*.test.tsx",
-        "**/*.config.ts",
+        'node_modules/',
+        'dist/',
+        'test/',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.config.ts',
       ],
     },
   },
@@ -60,7 +60,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Map @ to ./src for consistent imports
-      "@": resolve(__dirname, "./src"),
+      '@': resolve(__dirname, './src'),
     },
   },
 });

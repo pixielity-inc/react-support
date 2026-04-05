@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 /**
  * tsup Configuration for @abdokouta/logger Package
@@ -15,7 +15,7 @@ export default defineConfig({
    *
    * Exports the logger service, transporters, formatters, and hooks.
    */
-  entry: ["src/index.ts"],
+  entry: ['src/index.ts'],
 
   /**
    * Dual format output (ESM + CJS).
@@ -23,7 +23,7 @@ export default defineConfig({
    * - ESM: Modern module format for tree-shaking
    * - CJS: CommonJS for Node.js compatibility
    */
-  format: ["esm", "cjs"],
+  format: ['esm', 'cjs'],
 
   /**
    * Generate TypeScript declaration files.
@@ -60,14 +60,14 @@ export default defineConfig({
    * Supports modern browsers and Node.js 14+.
    * Includes optional chaining, nullish coalescing, and other ES2020 features.
    */
-  target: "es2020",
+  target: 'es2020',
 
   /**
    * Platform-neutral build.
    *
    * Works in both browser and Node.js environments.
    */
-  platform: "neutral",
+  platform: 'neutral',
 
   /**
    * External dependencies that should not be bundled.
@@ -75,7 +75,7 @@ export default defineConfig({
    * - @abdokouta/react-di: DI system (peer dependency)
    * - react: React library (optional peer dependency for hooks)
    */
-  external: ["@abdokouta/react-di", "react", "collect.js"],
+  external: ['@abdokouta/react-di', 'react', 'collect.js'],
 
   /**
    * Disable code splitting for library builds.
@@ -100,6 +100,6 @@ export default defineConfig({
    * This ensures proper module resolution in all environments.
    */
   outExtension({ format }) {
-    return { js: format === "esm" ? ".mjs" : ".js" };
+    return { js: format === 'esm' ? '.mjs' : '.js' };
   },
 });

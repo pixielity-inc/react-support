@@ -2,10 +2,7 @@
   "mcpServers": {
     "heroui-react": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@heroui/react-mcp@latest"
-      ],
+      "args": ["-y", "@heroui/react-mcp@latest"],
       "disabled": false,
       "autoApprove": [
         "list_components",
@@ -34,31 +31,19 @@
     },
     "npm-package-docs": {
       "command": "npx",
-      "args": [
-        "-y",
-        "npm-package-docs-mcp@latest"
-      ],
+      "args": ["-y", "npm-package-docs-mcp@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "filesystem": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem@latest",
-        "."
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@latest", "."],
       "disabled": false,
-      "autoApprove": [
-        "read_file"
-      ]
+      "autoApprove": ["read_file"]
     },
     "github": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-github@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-github@latest"],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": ""
       },
@@ -67,20 +52,13 @@
     },
     "git": {
       "command": "uvx",
-      "args": [
-        "mcp-server-git",
-        "--repository",
-        "."
-      ],
+      "args": ["mcp-server-git", "--repository", "."],
       "disabled": false,
       "autoApprove": []
     },
     "postgres": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-postgres@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-postgres@latest"],
       "env": {
         "POSTGRES_CONNECTION_STRING": ""
       },
@@ -89,38 +67,25 @@
     },
     "sqlite": {
       "command": "uvx",
-      "args": [
-        "mcp-server-sqlite",
-        "--db-path",
-        "./data.db"
-      ],
+      "args": ["mcp-server-sqlite", "--db-path", "./data.db"],
       "disabled": true,
       "autoApprove": []
     },
     "docker": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-docker@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-docker@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "memory": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-memory@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "brave-search": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-brave-search@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-brave-search@latest"],
       "env": {
         "BRAVE_API_KEY": ""
       },
@@ -129,10 +94,7 @@
     },
     "inversiland": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@abdokouta/inversiland-mcp@latest"
-      ],
+      "args": ["-y", "@abdokouta/inversiland-mcp@latest"],
       "disabled": true,
       "autoApprove": [
         "explore_structure",
@@ -144,10 +106,7 @@
     },
     "refine": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@abdokouta/refine-mcp@latest"
-      ],
+      "args": ["-y", "@abdokouta/refine-mcp@latest"],
       "disabled": true,
       "autoApprove": [
         "explore_structure",
@@ -159,37 +118,25 @@
     },
     "puppeteer": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "fetch": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-fetch@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-fetch@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "playwright": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@executeautomation/playwright-mcp-server@latest"
-      ],
+      "args": ["-y", "@executeautomation/playwright-mcp-server@latest"],
       "disabled": false,
       "autoApprove": []
     },
     "browserbase": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@browserbasehq/mcp-server-browserbase@latest"
-      ],
+      "args": ["-y", "@browserbasehq/mcp-server-browserbase@latest"],
       "env": {
         "BROWSERBASE_API_KEY": "",
         "BROWSERBASE_PROJECT_ID": ""
@@ -199,10 +146,7 @@
     },
     "sentry": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sentry@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-sentry@latest"],
       "env": {
         "SENTRY_AUTH_TOKEN": "",
         "SENTRY_ORG_SLUG": ""
@@ -212,10 +156,7 @@
     },
     "cloudflare": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@cloudflare/mcp-server-cloudflare@latest"
-      ],
+      "args": ["-y", "@cloudflare/mcp-server-cloudflare@latest"],
       "env": {
         "CLOUDFLARE_API_TOKEN": "",
         "CLOUDFLARE_ACCOUNT_ID": ""
@@ -225,10 +166,7 @@
     },
     "axiom": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@axiomhq/mcp-server-axiom@latest"
-      ],
+      "args": ["-y", "@axiomhq/mcp-server-axiom@latest"],
       "env": {
         "AXIOM_API_TOKEN": "",
         "AXIOM_DATASET": ""
@@ -238,10 +176,7 @@
     },
     "linear": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-linear@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-linear@latest"],
       "env": {
         "LINEAR_API_KEY": ""
       },
@@ -250,10 +185,7 @@
     },
     "slack": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-slack@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-slack@latest"],
       "env": {
         "SLACK_BOT_TOKEN": "",
         "SLACK_TEAM_ID": ""
@@ -263,10 +195,7 @@
     },
     "everart": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-everart@latest"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-everart@latest"],
       "env": {
         "EVERART_API_KEY": ""
       },

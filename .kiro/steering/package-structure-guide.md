@@ -5,7 +5,9 @@ inclusion: auto
 
 # Package Structure Guide - Monorepo with Turbo
 
-This guide documents the standard package structure pattern for monorepo projects using Turbo and pnpm workspaces. Follow this pattern when creating new packages to ensure consistency and maintainability.
+This guide documents the standard package structure pattern for monorepo
+projects using Turbo and pnpm workspaces. Follow this pattern when creating new
+packages to ensure consistency and maintainability.
 
 ## 🏗️ Monorepo Structure
 
@@ -114,8 +116,8 @@ Example applications demonstrating package usage (not published):
 
 ```yaml
 packages:
-  - "packages/*"
-  - "examples/*"
+  - 'packages/*'
+  - 'examples/*'
 ```
 
 **Key Points:**
@@ -340,7 +342,8 @@ packages/{package-name}/
 - `vitest` - Test runner
 - `@vitest/ui` - Test UI (optional)
 - `@types/node` - Node.js type definitions
-- For React packages: `@types/react`, `react`, `@testing-library/react`, `@testing-library/jest-dom`, `jsdom`
+- For React packages: `@types/react`, `react`, `@testing-library/react`,
+  `@testing-library/jest-dom`, `jsdom`
 
 ### 2. tsconfig.json
 
@@ -372,8 +375,8 @@ packages/{package-name}/
     /* Testing */
     "types": ["vitest/globals"]
   },
-  "include": ["src/** 
- * /*", "__tests__/* 
+  "include": ["src/**
+ * /*", "__tests__/*
  */*"],
   "exclude": ["node_modules", "dist", "config"]
 }
@@ -389,22 +392,22 @@ packages/{package-name}/
 ### 3. tsup.config.ts
 
 ```typescript
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["esm", "cjs"],
+  entry: ['src/index.ts'],
+  format: ['esm', 'cjs'],
   dts: true,
   sourcemap: true,
   clean: true,
   minify: false,
-  target: "es2020",
-  platform: "neutral",
-  external: ["@abdokouta/react-di", "react"],
+  target: 'es2020',
+  platform: 'neutral',
+  external: ['@abdokouta/react-di', 'react'],
   splitting: false,
   skipNodeModulesBundle: true,
   outExtension({ format }) {
-    return { js: format === "esm" ? ".mjs" : ".js" };
+    return { js: format === 'esm' ? '.mjs' : '.js' };
   },
 });
 ```
@@ -425,29 +428,29 @@ export default defineConfig({
 ### 4. vitest.config.ts
 
 ```typescript
-import { defineConfig } from "vitest/config";
-import path from "path";
+import { defineConfig } from 'vitest/config';
+import path from 'path';
 
 export default defineConfig({
   test: {
     globals: true,
-    environment: "jsdom", // or 'node' for non-React packages
-    setupFiles: ["__tests__/setup.ts"],
+    environment: 'jsdom', // or 'node' for non-React packages
+    setupFiles: ['__tests__/setup.ts'],
     coverage: {
-      provider: "v8",
-      reporter: ["text", "json", "html"],
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
       exclude: [
-        "node_modules/",
-        "__tests__/",
-        "dist/",
-        "**/*.test.ts",
-        "**/*.test.tsx",
+        'node_modules/',
+        '__tests__/',
+        'dist/',
+        '**/*.test.ts',
+        '**/*.test.tsx',
       ],
     },
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });
@@ -480,8 +483,10 @@ coverage/
 
 **Important Notes:**
 
-- `package-lock.json` or `pnpm-lock.yaml` MUST be committed to the repository (do NOT add to .gitignore)
-- The lockfile is required for `npm ci` or `pnpm install --frozen-lockfile` in CI/CD pipelines
+- `package-lock.json` or `pnpm-lock.yaml` MUST be committed to the repository
+  (do NOT add to .gitignore)
+- The lockfile is required for `npm ci` or `pnpm install --frozen-lockfile` in
+  CI/CD pipelines
 - For monorepo, only root lockfile is needed (`pnpm-lock.yaml` at root)
 
 ### 6. prettierrc.ts
@@ -495,7 +500,7 @@ coverage/
  * @see https://prettier.io/docs/en/configuration.html
  */
 
-export default "@nesvel/prettier-config";
+export default '@nesvel/prettier-config';
 ```
 
 **Key Points:**
@@ -603,8 +608,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -634,8 +639,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "pnpm"
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -671,7 +676,7 @@ name: Publish to npm
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
   workflow_dispatch:
 
 jobs:
@@ -696,9 +701,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
-          cache: "pnpm"
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -728,7 +733,8 @@ jobs:
 
 ## 🏗️ Registry Pattern (for Extensible Systems)
 
-When creating a package that needs to be extensible (like Logger, Cache, Redis, Config, Theming), implement the registry pattern:
+When creating a package that needs to be extensible (like Logger, Cache, Redis,
+Config, Theming), implement the registry pattern:
 
 ### Registry Structure
 
@@ -760,9 +766,9 @@ src/
  * @category Registries
  */
 
-import { BaseRegistry } from "@abdokouta/support";
-import { Injectable } from "@abdokouta/react-di";
-import type { ComponentInterface } from "@/interfaces/component.interface";
+import { BaseRegistry } from '@abdokouta/support';
+import { Injectable } from '@abdokouta/react-di';
+import type { ComponentInterface } from '@/interfaces/component.interface';
 
 /**
  * {ComponentType} Registry Service (DI-injectable)
@@ -794,7 +800,7 @@ export class ComponentRegistryService extends BaseRegistry<ComponentInterface> {
         if (!component.requiredProperty) {
           return {
             valid: false,
-            error: "Component must have requiredProperty",
+            error: 'Component must have requiredProperty',
           };
         }
         return { valid: true };
@@ -807,19 +813,19 @@ export class ComponentRegistryService extends BaseRegistry<ComponentInterface> {
 
   private loadBuiltInComponents(): void {
     // Register built-in components here
-    this.registerComponent("builtin1", builtIn1Component, true);
-    this.registerComponent("builtin2", builtIn2Component, true);
+    this.registerComponent('builtin1', builtIn1Component, true);
+    this.registerComponent('builtin2', builtIn2Component, true);
   }
 
   registerComponent(
     name: string,
     component: ComponentInterface,
-    isBuiltIn = false,
+    isBuiltIn = false
   ): void {
     // Check for name conflicts with built-in components
     if (!isBuiltIn && this.builtInComponents.has(name)) {
       throw new Error(
-        `Cannot register component "${name}": This name is reserved for a built-in component.`,
+        `Cannot register component "${name}": This name is reserved for a built-in component.`
       );
     }
 
@@ -865,7 +871,8 @@ export function Component(options: { name: string }) {
 
 ### Module Static Methods Pattern
 
-The module class MUST provide these three static methods following the health.module.ts pattern:
+The module class MUST provide these three static methods following the
+health.module.ts pattern:
 
 1. **forRoot(config)** - Primary configuration method
 2. **registerComponent(options)** - Register a single component
@@ -903,7 +910,7 @@ export class PackageModule {
    * ```
    */
   static registerComponent(
-    options: IComponentRegistrationOptions,
+    options: IComponentRegistrationOptions
   ): DynamicModule {
     PackageModule.registry.register(options);
 
@@ -921,7 +928,7 @@ export class PackageModule {
    * @returns Dynamic module
    */
   static registerComponents(
-    optionsArray: IComponentRegistrationOptions[],
+    optionsArray: IComponentRegistrationOptions[]
   ): DynamicModule {
     PackageModule.registry.registerMultiple(optionsArray);
 
@@ -947,18 +954,22 @@ export class PackageModule {
 
 ## 📝 Index File Pattern
 
-Every folder with multiple files MUST have an `index.ts` that re-exports the public API.
+Every folder with multiple files MUST have an `index.ts` that re-exports the
+public API.
 
 ### Index File Types
 
 There are two types of index files:
 
-1. **Main Folder Index Files** - Located at the root of major folders (e.g., `src/interfaces/index.ts`, `src/types/index.ts`, `src/decorators/index.ts`)
+1. **Main Folder Index Files** - Located at the root of major folders (e.g.,
+   `src/interfaces/index.ts`, `src/types/index.ts`, `src/decorators/index.ts`)
    - MUST have full docblock with `@fileoverview`, `@module`, and `@category`
-   - MUST use section headers with `// ============================================================================`
+   - MUST use section headers with
+     `// ============================================================================`
    - MUST group exports by category
 
-2. **Sub-Folder Index Files** - Located in nested folders (e.g., `src/hooks/use-inject/index.ts`)
+2. **Sub-Folder Index Files** - Located in nested folders (e.g.,
+   `src/hooks/use-inject/index.ts`)
    - MUST have simple docblock with `@fileoverview`, `@module`, and `@category`
    - NO section headers needed
    - Simple re-exports only
@@ -985,61 +996,61 @@ There are two types of index files:
 // ============================================================================
 // Module (DI Configuration)
 // ============================================================================
-export { PackageModule } from "./{package-name}.module";
+export { PackageModule } from './{package-name}.module';
 
 // ============================================================================
 // Core Services
 // ============================================================================
-export { MainService } from "./services/main.service";
-export type { MainServiceInterface } from "./interfaces/main-service.interface";
+export { MainService } from './services/main.service';
+export type { MainServiceInterface } from './interfaces/main-service.interface';
 
 // ============================================================================
 // Registries (if applicable)
 // ============================================================================
-export { ComponentRegistryService, componentRegistry } from "./registries";
-export { Component } from "./registries";
+export { ComponentRegistryService, componentRegistry } from './registries';
+export { Component } from './registries';
 
 // ============================================================================
 // Components (if applicable)
 // ============================================================================
-export { MyComponent } from "./components";
-export type { MyComponentProps } from "./components";
+export { MyComponent } from './components';
+export type { MyComponentProps } from './components';
 
 // ============================================================================
 // Hooks (if applicable)
 // ============================================================================
-export { useMyHook } from "./hooks";
-export type { UseMyHookReturn } from "./hooks";
+export { useMyHook } from './hooks';
+export type { UseMyHookReturn } from './hooks';
 
 // ============================================================================
 // Interfaces
 // ============================================================================
-export type { MyInterface } from "./interfaces";
+export type { MyInterface } from './interfaces';
 
 // ============================================================================
 // Types
 // ============================================================================
-export type { MyType } from "./types";
+export type { MyType } from './types';
 
 // ============================================================================
 // Enums
 // ============================================================================
-export { MyEnum } from "./enums";
+export { MyEnum } from './enums';
 
 // ============================================================================
 // Configuration
 // ============================================================================
-export { DEFAULT_CONFIG } from "./config";
+export { DEFAULT_CONFIG } from './config';
 
 // ============================================================================
 // Constants
 // ============================================================================
-export { MY_CONSTANT } from "./constants";
+export { MY_CONSTANT } from './constants';
 
 // ============================================================================
 // Utilities
 // ============================================================================
-export { myUtil } from "./utils";
+export { myUtil } from './utils';
 ````
 
 ### Main Folder Index Pattern
@@ -1057,20 +1068,20 @@ export { myUtil } from "./utils";
 // ============================================================================
 // Module Configuration Interfaces
 // ============================================================================
-export type { IContainerConfig } from "./container-config.interface";
-export type { IModuleOptions } from "./module-options.interface";
-export type { IModuleAsyncOptions } from "./module-async-options.interface";
+export type { IContainerConfig } from './container-config.interface';
+export type { IModuleOptions } from './module-options.interface';
+export type { IModuleAsyncOptions } from './module-async-options.interface';
 
 // ============================================================================
 // Lifecycle Interfaces
 // ============================================================================
-export type { OnModuleInit, OnModuleDestroy } from "./lifecycle.interface";
-export { hasOnModuleInit, hasOnModuleDestroy } from "./lifecycle.interface";
+export type { OnModuleInit, OnModuleDestroy } from './lifecycle.interface';
+export { hasOnModuleInit, hasOnModuleDestroy } from './lifecycle.interface';
 
 // ============================================================================
 // Component Interfaces
 // ============================================================================
-export type { ContainerProviderProps } from "./container-provider-props.interface";
+export type { ContainerProviderProps } from './container-provider-props.interface';
 ```
 
 ### Sub-Folder Index Pattern
@@ -1085,7 +1096,7 @@ export type { ContainerProviderProps } from "./container-provider-props.interfac
  * @category Hooks
  */
 
-export { useInject } from "./use-inject.hook";
+export { useInject } from './use-inject.hook';
 ```
 
 **Key Points:**
@@ -1094,14 +1105,16 @@ export { useInject } from "./use-inject.hook";
 - Export both classes and their interfaces
 - Export decorators from registries
 - Maintain consistent ordering across packages
-- Use relative imports (e.g., `"../types"`) instead of path aliases (e.g., `"@/types"`)
+- Use relative imports (e.g., `"../types"`) instead of path aliases (e.g.,
+  `"@/types"`)
 - Sub-folder index files should be simple with just a docblock and exports
 
 **Import Path Rules:**
 
 - NEVER use path aliases like `@/types/service-identifier.type` in source files
 - ALWAYS use relative imports like `"../types"` or `"../../types"`
-- Import from the folder's index file, not individual files (e.g., `from "../types"` not `from "../types/service-identifier.type"`)
+- Import from the folder's index file, not individual files (e.g.,
+  `from "../types"` not `from "../types/service-identifier.type"`)
 
 ---
 
@@ -1110,10 +1123,10 @@ export { useInject } from "./use-inject.hook";
 ### Test File Structure
 
 ```typescript
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { MyService } from "./my-service.service";
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { MyService } from './my-service.service';
 
-describe("MyService", () => {
+describe('MyService', () => {
   let service: MyService;
 
   beforeEach(() => {
@@ -1124,24 +1137,24 @@ describe("MyService", () => {
     // Cleanup
   });
 
-  describe("methodName", () => {
-    it("should do something when condition is met", () => {
+  describe('methodName', () => {
+    it('should do something when condition is met', () => {
       // Arrange
-      const input = "test";
+      const input = 'test';
 
       // Act
       const result = service.methodName(input);
 
       // Assert
-      expect(result).toBe("expected");
+      expect(result).toBe('expected');
     });
 
-    it("should throw error when invalid input", () => {
+    it('should throw error when invalid input', () => {
       // Arrange
       const invalidInput = null;
 
       // Act & Assert
-      expect(() => service.methodName(invalidInput)).toThrow("Error message");
+      expect(() => service.methodName(invalidInput)).toThrow('Error message');
     });
   });
 });
@@ -1229,11 +1242,11 @@ export interface ComponentNameProps {
  * @category Hooks
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import type {
   UseHookNameReturn,
   UseHookNameOptions,
-} from "./use-hook-name.types";
+} from './use-hook-name.types';
 
 /**
  * use{HookName} Hook
@@ -1249,7 +1262,7 @@ import type {
  * ```
  */
 export const useHookName = (
-  options?: UseHookNameOptions,
+  options?: UseHookNameOptions
 ): UseHookNameReturn => {
   const [value, setValue] = useState(options?.initialValue);
 
@@ -1309,9 +1322,9 @@ export interface UseHookNameReturn {
  * @category Services
  */
 
-import { Injectable, Inject } from "@abdokouta/react-di";
-import type { ServiceNameInterface } from "@/interfaces/service-name.interface";
-import { DEPENDENCY_TOKEN } from "@/constants/tokens.constant";
+import { Injectable, Inject } from '@abdokouta/react-di';
+import type { ServiceNameInterface } from '@/interfaces/service-name.interface';
+import { DEPENDENCY_TOKEN } from '@/constants/tokens.constant';
 
 /**
  * {ServiceName} Service
@@ -1351,7 +1364,8 @@ export class ServiceName implements ServiceNameInterface {
 
 ### Module File Structure
 
-All packages that provide configurable functionality MUST follow this standard module pattern, inspired by the health.module.ts reference implementation.
+All packages that provide configurable functionality MUST follow this standard
+module pattern, inspired by the health.module.ts reference implementation.
 
 ````typescript
 /**
@@ -1462,7 +1476,7 @@ export class PackageModule {
   static forRoot(config: IPackageModuleOptions = {}): DynamicModule {
     // Merge with defaults
     const mergedConfig: IPackageModuleOptions = {
-      basePath: config.basePath || "default",
+      basePath: config.basePath || 'default',
       enabled: config.enabled !== false,
       components: {
         component1: config.components?.component1 !== false,
@@ -1483,7 +1497,7 @@ export class PackageModule {
       providers.push(Component1);
       PackageModule.registry.register({
         component: Component1,
-        name: "component1",
+        name: 'component1',
       });
     }
 
@@ -1491,7 +1505,7 @@ export class PackageModule {
       providers.push(Component2);
       PackageModule.registry.register({
         component: Component2,
-        name: "component2",
+        name: 'component2',
       });
     }
 
@@ -1528,7 +1542,7 @@ export class PackageModule {
       controllers: [DynamicController],
       providers,
       exports: providers.filter(
-        (p) => typeof p !== "object" || p.provide !== PACKAGE_MODULE_CONFIG,
+        (p) => typeof p !== 'object' || p.provide !== PACKAGE_MODULE_CONFIG
       ),
     };
   }
@@ -1580,7 +1594,7 @@ export class PackageModule {
    * ```
    */
   static registerComponent(
-    options: IComponentRegistrationOptions,
+    options: IComponentRegistrationOptions
   ): DynamicModule {
     // Register the component in the global registry
     PackageModule.registry.register(options);
@@ -1640,7 +1654,7 @@ export class PackageModule {
    * ```
    */
   static registerComponents(
-    optionsArray: IComponentRegistrationOptions[],
+    optionsArray: IComponentRegistrationOptions[]
   ): DynamicModule {
     // Register all components in the global registry
     PackageModule.registry.registerMultiple(optionsArray);
@@ -1659,14 +1673,20 @@ export class PackageModule {
 
 ### Module Pattern Key Principles
 
-1. **Static Registry**: Use a private static registry instance shared across all module instances
-2. **forRoot() Method**: Primary configuration method that merges user config with defaults
-3. **Registration Methods**: Provide `registerComponent()` and `registerComponents()` for extensibility
-4. **Dynamic Module**: Return DynamicModule with proper imports, providers, controllers, and exports
+1. **Static Registry**: Use a private static registry instance shared across all
+   module instances
+2. **forRoot() Method**: Primary configuration method that merges user config
+   with defaults
+3. **Registration Methods**: Provide `registerComponent()` and
+   `registerComponents()` for extensibility
+4. **Dynamic Module**: Return DynamicModule with proper imports, providers,
+   controllers, and exports
 5. **Configuration Provider**: Inject configuration using a constant token
-6. **Comprehensive JSDoc**: Include multiple examples showing basic, advanced, and edge case usage
+6. **Comprehensive JSDoc**: Include multiple examples showing basic, advanced,
+   and edge case usage
 7. **Conditional Providers**: Only add providers based on configuration flags
-8. **Registry Integration**: Register components in the global registry for cross-module access
+8. **Registry Integration**: Register components in the global registry for
+   cross-module access
 
 ### Module Configuration Interface
 
@@ -1753,9 +1773,7 @@ Brief description of the package.
 
 ## Installation
 
-\`\`\`bash
-pnpm add @abdokouta/{package-name}
-\`\`\`
+\`\`\`bash pnpm add @abdokouta/{package-name} \`\`\`
 
 ## Features
 
@@ -1767,17 +1785,13 @@ pnpm add @abdokouta/{package-name}
 
 ### Basic Usage
 
-\`\`\`typescript
-import { Service } from '@abdokouta/{package-name}';
+\`\`\`typescript import { Service } from '@abdokouta/{package-name}';
 
-// Usage example
-\`\`\`
+// Usage example \`\`\`
 
 ### Advanced Usage
 
-\`\`\`typescript
-// Advanced example
-\`\`\`
+\`\`\`typescript // Advanced example \`\`\`
 
 ## API Reference
 
@@ -1812,9 +1826,7 @@ Configuration options and examples.
 
 ## Testing
 
-\`\`\`bash
-pnpm test
-\`\`\`
+\`\`\`bash pnpm test \`\`\`
 
 ## License
 
@@ -1823,7 +1835,8 @@ MIT
 
 ### 2. JSDoc Comments
 
-All exported functions, classes, interfaces, and types MUST have JSDoc comments with:
+All exported functions, classes, interfaces, and types MUST have JSDoc comments
+with:
 
 - `@fileoverview` - File description
 - `@module` - Module name
@@ -1852,7 +1865,8 @@ All exported functions, classes, interfaces, and types MUST have JSDoc comments 
 
 - [ ] Create `src/` directory
 - [ ] Create `src/index.ts` as main entry point
-- [ ] Create `src/{package-name}.module.ts` following the standard module pattern
+- [ ] Create `src/{package-name}.module.ts` following the standard module
+      pattern
   - [ ] Add `@Module({})` decorator
   - [ ] Add private static registry instance
   - [ ] Implement `forRoot(config)` method with comprehensive JSDoc
@@ -1945,33 +1959,50 @@ Then fill in the configuration files using the templates above.
 
 ## 📖 Additional Resources
 
-- [Health Module Reference](sources/health.module.ts) - **STANDARD MODULE PATTERN** - All modules MUST follow this pattern
-- [Refine Conventions](.kiro/steering/refine-conventions.md) - File naming and structure conventions
-- [BaseRegistry Documentation](packages/production/support/src/collections/base-registry.ts) - Registry pattern implementation
-- [Container Documentation](packages/production/container/README.md) - Dependency injection system
-- [Theming Package](packages/production/theming/) - Reference implementation with registries
-- [Logger Package](packages/production/logger/) - Reference implementation with transporters and formatters
+- [Health Module Reference](sources/health.module.ts) - **STANDARD MODULE
+  PATTERN** - All modules MUST follow this pattern
+- [Refine Conventions](.kiro/steering/refine-conventions.md) - File naming and
+  structure conventions
+- [BaseRegistry Documentation](packages/production/support/src/collections/base-registry.ts) -
+  Registry pattern implementation
+- [Container Documentation](packages/production/container/README.md) -
+  Dependency injection system
+- [Theming Package](packages/production/theming/) - Reference implementation
+  with registries
+- [Logger Package](packages/production/logger/) - Reference implementation with
+  transporters and formatters
 
 ---
 
 ## 💡 Best Practices
 
-1. **Follow the Single Responsibility Principle** - Each file should have one clear purpose
-2. **Use the Standard Module Pattern** - All modules MUST follow the health.module.ts pattern with forRoot(), registerComponent(), and registerComponents() methods
-3. **Use Dependency Injection** - Leverage `@abdokouta/react-di` for loose coupling
+1. **Follow the Single Responsibility Principle** - Each file should have one
+   clear purpose
+2. **Use the Standard Module Pattern** - All modules MUST follow the
+   health.module.ts pattern with forRoot(), registerComponent(), and
+   registerComponents() methods
+3. **Use Dependency Injection** - Leverage `@abdokouta/react-di` for loose
+   coupling
 4. **Write Tests First** - TDD approach ensures better code quality
-5. **Document Everything** - JSDoc comments with multiple examples help other developers understand your code
+5. **Document Everything** - JSDoc comments with multiple examples help other
+   developers understand your code
 6. **Use TypeScript Strictly** - Enable strict mode and avoid `any` types
-7. **Follow Naming Conventions** - Consistency makes the codebase easier to navigate
+7. **Follow Naming Conventions** - Consistency makes the codebase easier to
+   navigate
 8. **Keep It Simple** - Don't over-engineer, start simple and refactor as needed
-9. **Use Registries for Extensibility** - When building pluggable systems, use the registry pattern with static registry instances
-10. **Maintain Backward Compatibility** - Don't break existing APIs without major version bump
-11. **Write Comprehensive Examples** - Examples in `.examples/` and JSDoc help users understand usage
-12. **Static Registry Pattern** - Use private static registry instances in modules for cross-instance component management
-13. **Configuration Merging** - Always merge user configuration with sensible defaults in forRoot()
-14. **Conditional Providers** - Only add providers to the module based on configuration flags
+9. **Use Registries for Extensibility** - When building pluggable systems, use
+   the registry pattern with static registry instances
+10. **Maintain Backward Compatibility** - Don't break existing APIs without
+    major version bump
+11. **Write Comprehensive Examples** - Examples in `.examples/` and JSDoc help
+    users understand usage
+12. **Static Registry Pattern** - Use private static registry instances in
+    modules for cross-instance component management
+13. **Configuration Merging** - Always merge user configuration with sensible
+    defaults in forRoot()
+14. **Conditional Providers** - Only add providers to the module based on
+    configuration flags
 
 ---
 
-**Last Updated:** 2026-03-30
-**Maintained By:** Pixielity Team
+**Last Updated:** 2026-03-30 **Maintained By:** Pixielity Team
