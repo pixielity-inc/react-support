@@ -1,1 +1,1 @@
-export { isFake } from "./is-fake.util";
+// Utils barrel - currently empty after facade removal

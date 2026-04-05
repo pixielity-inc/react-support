@@ -1,9 +1,3 @@
-// Facades
-export type { CreateFacadeOptions } from "./create-facade-options.type";
-export type { FacadeApplication } from "./facade-application.type";
-export type { FacadeClass } from "./facade-class.type";
-export type { Fake } from "./fake.type";
-
 // Managers
 export type { DriverCreator } from "./driver-creator.type";
 

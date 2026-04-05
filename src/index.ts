@@ -1,9 +1,7 @@
 /**
- * @abdokouta/support
+ * @fileoverview @abdokouta/react-support
  *
  * Laravel-style utilities for JavaScript/TypeScript.
- * Provides Str class for string manipulation, Collection classes for data structures,
- * and BaseRegistry for building extensible registry patterns.
  *
  * @module @abdokouta/support
  */
@@ -41,13 +39,4 @@ export type {
   Collection as RegistryCollection,
   ValidationResult,
   DriverCreator,
-  CreateFacadeOptions,
-  FacadeApplication,
-  FacadeClass,
-  Fake,
 } from "@/types";
-
-// ============================================================================
-// Utils
-// ============================================================================
-export { isFake } from "@/utils";

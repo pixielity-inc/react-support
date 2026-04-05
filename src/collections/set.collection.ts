@@ -195,7 +195,7 @@ export class SetCollection<T = any> {
     }
     
     for (let i = 0; i < items.length; i++) {
-      if (callback(items[i], i)) {
+      if (callback(items[i]!, i)) {
         return items[i];
       }
     }

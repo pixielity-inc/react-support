@@ -184,7 +184,10 @@ export class Collection<T = any> {
    * Join all items from the collection using a string
    */
   join(glue: string, finalGlue?: string): string {
-    return this.collection.join(glue, finalGlue);
+    if (finalGlue) {
+      return (this.collection as any).join(glue, finalGlue);
+    }
+    return (this.collection as any).join(glue);
   }
 
   /**
