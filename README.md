@@ -113,7 +113,7 @@ collect([1, 2, 3, 4, 5]).min(); // 1
 
 ```typescript
 import { Facade, createFacade } from '@abdokouta/react-support';
-import { Container } from '@abdokouta/react-di';
+import { Container } from '@abdokouta/ts-container';
 
 // Set the container for facades
 Facade.setFacadeContainer(Container.getContainer());

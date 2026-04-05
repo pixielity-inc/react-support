@@ -1,29 +1,28 @@
 {
-  "extends": "@nesvel/typescript-config/base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": ".",
-    "lib": ["ES2020", "DOM"],
-    /* Silence TypeScript deprecation warnings */
-    "ignoreDeprecations": "6.0",
-    /* Module resolution - Override Nesvel's NodeNext for compatibility */
+    "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    /* Decorators - Required for DI container */
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    /* Build options */
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "jsx": "react-jsx",
-    /* Testing */
-    "types": ["vitest/globals", "node"],
+    "outDir": "dist",
+    "rootDir": "src",
+    "ignoreDeprecations": "6.0",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "__tests__/**/*"],
-  "exclude": ["node_modules", "dist", "config"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "__tests__"]
 }

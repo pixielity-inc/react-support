@@ -1,6 +1,6 @@
 {
   "name": "@abdokouta/react-support",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Laravel-style Str, Collection, and Registry utilities for JavaScript/TypeScript",
   "keywords": [
     "laravel",
@@ -56,15 +56,14 @@
     "collect.js": "^4.36.1"
   },
   "peerDependencies": {
-    "@abdokouta/react-di": "^2.0.0"
+    "@abdokouta/ts-container": "^1.2.0"
   },
   "peerDependenciesMeta": {
-    "@abdokouta/react-di": {
+    "@abdokouta/ts-container": {
       "optional": true
     }
   },
   "devDependencies": {
-    "@abdokouta/react-di": "^2.1.3",
     "@nesvel/eslint-config": "^1.0.5",
     "@nesvel/prettier-config": "^1.0.3",
     "@nesvel/typescript-config": "^1.0.4",

@@ -1,2 +1,4 @@
-/** @type {import("prettier").Config} */
+/**
+ * @type {import("prettier").Config}
+ */
 export default '@nesvel/prettier-config';

@@ -24,7 +24,7 @@ This project uses a monorepo structure with:
 
 Core library packages that can be published to npm:
 
-- `packages/container/` - Main DI container library (`@abdokouta/react-di`)
+- `packages/container/` - Main DI container library (`@abdokouta/ts-container`)
 - Future packages can be added here
 
 ### Example Applications (`examples/`)
@@ -41,7 +41,7 @@ Example applications demonstrating package usage (not published):
 ```
 .
 ├── packages/                     # Library packages (publishable)
-│   └── container/                # @abdokouta/react-di package
+│   └── container/                # @abdokouta/ts-container package
 │       ├── src/                  # Source code
 │       ├── __tests__/            # Tests
 │       ├── dist/                 # Build output
@@ -79,7 +79,7 @@ Example applications demonstrating package usage (not published):
 
 ```json
 {
-  "name": "@abdokouta/react-di-monorepo",
+  "name": "@abdokouta/ts-container-monorepo",
   "version": "1.0.4",
   "private": true,
   "description": "Dependency injection for React - NestJS-style modules powered by Inversiland",
@@ -403,7 +403,7 @@ export default defineConfig({
   minify: false,
   target: 'es2020',
   platform: 'neutral',
-  external: ['@abdokouta/react-di', 'react'],
+  external: ['@abdokouta/ts-container', 'react'],
   splitting: false,
   skipNodeModulesBundle: true,
   outExtension({ format }) {
@@ -538,10 +538,10 @@ pnpm clean
 
 ```bash
 # Build specific package
-pnpm --filter @abdokouta/react-di build
+pnpm --filter @abdokouta/ts-container build
 
 # Run dev mode for specific package
-pnpm --filter @abdokouta/react-di dev
+pnpm --filter @abdokouta/ts-container dev
 
 # Run example app
 pnpm --filter vite-template dev
@@ -554,7 +554,7 @@ pnpm --filter vite-template dev
 pnpm install
 
 # Add dependency to specific package
-pnpm --filter @abdokouta/react-di add inversify
+pnpm --filter @abdokouta/ts-container add inversify
 
 # Add dev dependency to root
 pnpm add -D -w turbo
@@ -767,7 +767,7 @@ src/
  */
 
 import { BaseRegistry } from '@abdokouta/support';
-import { Injectable } from '@abdokouta/react-di';
+import { Injectable } from '@abdokouta/ts-container';
 import type { ComponentInterface } from '@/interfaces/component.interface';
 
 /**
@@ -777,7 +777,7 @@ import type { ComponentInterface } from '@/interfaces/component.interface';
  *
  * @example
  * ```typescript
- * import { useInject } from '@abdokouta/react-di';
+ * import { useInject } from '@abdokouta/ts-container';
  * import { ComponentRegistryService } from '@abdokouta/{package-name}';
  *
  * const registry = useInject(ComponentRegistryService);
@@ -1322,7 +1322,7 @@ export interface UseHookNameReturn {
  * @category Services
  */
 
-import { Injectable, Inject } from '@abdokouta/react-di';
+import { Injectable, Inject } from '@abdokouta/ts-container';
 import type { ServiceNameInterface } from '@/interfaces/service-name.interface';
 import { DEPENDENCY_TOKEN } from '@/constants/tokens.constant';
 
@@ -1981,7 +1981,7 @@ Then fill in the configuration files using the templates above.
 2. **Use the Standard Module Pattern** - All modules MUST follow the
    health.module.ts pattern with forRoot(), registerComponent(), and
    registerComponents() methods
-3. **Use Dependency Injection** - Leverage `@abdokouta/react-di` for loose
+3. **Use Dependency Injection** - Leverage `@abdokouta/ts-container` for loose
    coupling
 4. **Write Tests First** - TDD approach ensures better code quality
 5. **Document Everything** - JSDoc comments with multiple examples help other

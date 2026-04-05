@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2026-04-05
+
+### Stable Release
+
+- First production-grade stable release
+- All features from previous versions are now considered stable and
+  production-ready
+- API is now stabilized — breaking changes will follow semver from this point
+  forward
+
 ## [1.2.0] - 2026-04-05
 
 ### Refactored
