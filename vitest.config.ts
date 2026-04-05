@@ -27,8 +27,8 @@ export default defineConfig({
     // Enable global test functions (describe, it, expect, etc.)
     globals: true,
 
-    // Use jsdom environment for React testing
-    environment: "jsdom",
+    // Use node environment
+    environment: "node",
 
     // Run setup file before tests
     setupFiles: ["./__tests__/vitest.setup.ts"],
